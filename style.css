@@ -1,39 +1,102 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Explosionszeichnung mit Ersatzteilliste</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+    }
+    .svg-container {
+      flex: 1;
+      max-width: 60%;
+      border: 1px solid #ccc;
+      padding: 10px;
+      margin-right: 20px;
+    }
+    .part-list {
+      flex: 1;
+      max-width: 35%;
+      border: 1px solid #ccc;
+      padding: 10px;
+    }
+    .part-list ul {
+      list-style: none;
+      padding: 0;
+    }
+    .part-list li {
+      padding: 8px;
+      border-bottom: 1px solid #ddd;
+    }
+    .part-list li.highlight {
+      background-color: #f0f8ff;
+    }
+  </style>
+</head>
+<body>
+  <h1>Explosionszeichnung mit Ersatzteilliste</h1>
+  <div class="container">
+    <!-- SVG Container -->
+    <div class="svg-container">
+      <h2>Explosionszeichnung</h2>
+      <svg id="exploded-view" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="auto">
+        <!-- Beispielteile -->
+        <circle id="part1" cx="100" cy="100" r="40" fill="red" stroke="black" stroke-width="2" />
+        <rect id="part2" x="200" y="200" width="80" height="80" fill="blue" stroke="black" stroke-width="2" />
+        <polygon id="part3" points="300,100 350,50 400,100" fill="green" stroke="black" stroke-width="2" />
+        <!-- Labels -->
+        <text x="100" y="100" text-anchor="middle" dy="5" fill="white">1</text>
+        <text x="240" y="240" text-anchor="middle" dy="5" fill="white">2</text>
+        <text x="350" y="90" text-anchor="middle" dy="5" fill="white">3</text>
+      </svg>
+    </div>
 
-body {
-  font-family: Arial, sans-serif;
-  margin: 20px;
-}
+    <!-- Ersatzteilliste -->
+    <div class="part-list">
+      <h2>Ersatzteilliste</h2>
+      <ul id="parts">
+        <li id="list-part1" data-id="part1">Teil 1: Rot (Kreis) - Artikelnummer: 1001</li>
+        <li id="list-part2" data-id="part2">Teil 2: Blau (Rechteck) - Artikelnummer: 1002</li>
+        <li id="list-part3" data-id="part3">Teil 3: Grün (Dreieck) - Artikelnummer: 1003</li>
+      </ul>
+    </div>
+  </div>
 
-.container {
-  display: flex;
-  flex-wrap: wrap;
-}
+  <script>
+    // Klick-Event für SVG-Teile
+    const svgParts = document.querySelectorAll("#exploded-view [id^='part']");
+    const listItems = document.querySelectorAll("#parts li");
 
-.svg-container {
-  flex: 1;
-  max-width: 60%;
-  border: 1px solid #ccc;
-  padding: 10px;
-  margin-right: 20px;
-}
+    svgParts.forEach(part => {
+      part.addEventListener("click", () => {
+        highlightPart(part.id);
+      });
+    });
 
-.part-list {
-  flex: 1;
-  max-width: 35%;
-  border: 1px solid #ccc;
-  padding: 10px;
-}
+    listItems.forEach(item => {
+      item.addEventListener("click", () => {
+        highlightPart(item.dataset.id);
+      });
+    });
 
-.part-list ul {
-  list-style: none;
-  padding: 0;
-}
+    function highlightPart(partId) {
+      // Entferne Hervorhebung von allen Teilen
+      svgParts.forEach(part => part.setAttribute("stroke-width", "2"));
+      listItems.forEach(item => item.classList.remove("highlight"));
 
-.part-list li {
-  padding: 8px;
-  border-bottom: 1px solid #ddd;
-}
+      // Hervorhebung hinzufügen
+      const selectedPart = document.getElementById(partId);
+      const selectedListItem = document.querySelector(`#parts li[data-id='${partId}']`);
 
-.part-list li.highlight {
-  background-color: #f0f8ff;
-}
+      if (selectedPart) selectedPart.setAttribute("stroke-width", "5");
+      if (selectedListItem) selectedListItem.classList.add("highlight");
+    }
+  </script>
+</body>
+</html>
