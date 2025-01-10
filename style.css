@@ -1,0 +1,39 @@
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.svg-container {
+  flex: 1;
+  max-width: 60%;
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-right: 20px;
+}
+
+.part-list {
+  flex: 1;
+  max-width: 35%;
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+.part-list ul {
+  list-style: none;
+  padding: 0;
+}
+
+.part-list li {
+  padding: 8px;
+  border-bottom: 1px solid #ddd;
+}
+
+.part-list li.highlight {
+  background-color: #f0f8ff;
+}

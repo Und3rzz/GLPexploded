@@ -1,0 +1,35 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Explosionszeichnung</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Explosionszeichnung mit Ersatzteilliste</h1>
+  <div class="container">
+    <div class="svg-container">
+      <h2>Explosionszeichnung</h2>
+      <svg id="exploded-view" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="auto">
+        <circle id="part1" cx="100" cy="100" r="40" fill="red" stroke="black" stroke-width="2"></circle>
+        <rect id="part2" x="200" y="200" width="80" height="80" fill="blue" stroke="black" stroke-width="2"></rect>
+        <polygon id="part3" points="300,100 350,50 400,100" fill="green" stroke="black" stroke-width="2"></polygon>
+        <text x="100" y="100" text-anchor="middle" dy="5" fill="white">1</text>
+        <text x="240" y="240" text-anchor="middle" dy="5" fill="white">2</text>
+        <text x="350" y="90" text-anchor="middle" dy="5" fill="white">3</text>
+      </svg>
+    </div>
+    <div class="part-list">
+      <h2>Ersatzteilliste</h2>
+      <ul id="parts">
+        <li data-id="part1">Teil 1: Rot (Kreis) - Artikelnummer: 1001</li>
+        <li data-id="part2">Teil 2: Blau (Rechteck) - Artikelnummer: 1002</li>
+        <li data-id="part3">Teil 3: Grün (Dreieck) - Artikelnummer: 1003</li>
+      </ul>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
